@@ -1,23 +1,27 @@
 -- create_datawarehouse.sql
 
--- Optional: If you want a fresh setup each time, drop the DB (BE CAREFUL!)
--- DROP DATABASE IF EXISTS datawarehouse;
-
--- 1. Connect to the default or "postgres" database first.
+-- 1. Connect to the default or "postgres" database (or another DB where you have sufficient privileges)
 \connect postgres
 
--- 2. Create the datawarehouse database
+-- 2. Drop the 'datawarehouse' database if it already exists
+DROP DATABASE IF EXISTS datawarehouse;
+
+-- 3. Create a new 'datawarehouse' database
 CREATE DATABASE datawarehouse;
 
--- 3. Connect to the newly created datawarehouse database
+-- 4. Connect to the newly created 'datawarehouse' database
 \connect datawarehouse
 
--- 4. Create the schemas
-CREATE SCHEMA IF NOT EXISTS BRONZE;
-CREATE SCHEMA IF NOT EXISTS SILVER;
-CREATE SCHEMA IF NOT EXISTS GOLD;
+-- 5. Drop existing schemas (if present) inside the 'datawarehouse' DB
+DROP SCHEMA IF EXISTS BRONZE CASCADE;
+DROP SCHEMA IF EXISTS SILVER CASCADE;
+DROP SCHEMA IF EXISTS GOLD CASCADE;
 
--- (Optional) Change schema ownership or grant privileges here, e.g.:
+-- 6. Create fresh schemas
+CREATE SCHEMA BRONZE;
+CREATE SCHEMA SILVER;
+CREATE SCHEMA GOLD;
+
+-- (Optional) If you want to set owners or grant privileges, you can do so here
 -- ALTER SCHEMA BRONZE OWNER TO my_user;
--- GRANT USAGE ON SCHEMA BRONZE TO some_role;
--- GRANT CREATE ON SCHEMA BRONZE TO some_role;
+-- GRANT ALL ON SCHEMA BRONZE TO my_user;
