@@ -1,27 +1,35 @@
--- create_datawarehouse.sql
+/*
+===============================================
+Create Database and Schemas
+===============================================
 
--- 1. Connect to the default or "postgres" database (or another DB where you have sufficient privileges)
-\connect postgres
+Script Purpose:
+This script initializes the `datawarehouse` database and sets up 
+a 3-layer architecture following the Medallion architecture pattern:
+- Bronze: Raw data
+- Silver: Cleaned/validated data
+- Gold: Aggregated/business-ready data
 
--- 2. Drop the 'datawarehouse' database if it already exists
+WARNING:
+- Running this will drop `datawarehouse` if it already exists.
+- Make sure you have backups before executing it.
+
+Author: Sumanth Koppula
+*/
+
+-- Step 1: Connect to the default `postgres` database
+\c postgres;
+
+-- Step 2: Drop `datawarehouse` if it exists (caution: this deletes everything inside)
 DROP DATABASE IF EXISTS datawarehouse;
 
--- 3. Create a new 'datawarehouse' database
+-- Step 3: Create a fresh `datawarehouse` database
 CREATE DATABASE datawarehouse;
 
--- 4. Connect to the newly created 'datawarehouse' database
-\connect datawarehouse
+-- Step 4: Connect to the newly created `datawarehouse`
+\c datawarehouse;
 
--- 5. Drop existing schemas (if present) inside the 'datawarehouse' DB
-DROP SCHEMA IF EXISTS BRONZE CASCADE;
-DROP SCHEMA IF EXISTS SILVER CASCADE;
-DROP SCHEMA IF EXISTS GOLD CASCADE;
-
--- 6. Create fresh schemas
-CREATE SCHEMA BRONZE;
-CREATE SCHEMA SILVER;
-CREATE SCHEMA GOLD;
-
--- (Optional) If you want to set owners or grant privileges, you can do so here
--- ALTER SCHEMA BRONZE OWNER TO my_user;
--- GRANT ALL ON SCHEMA BRONZE TO my_user;
+--Step 5: Create schemas for bronze, silver, and gold layers
+CREATE SCHEMA IF NOT EXISTS bronze;
+CREATE SCHEMA IF NOT EXISTS silver;
+CREATE SCHEMA IF NOT EXISTS gold;
