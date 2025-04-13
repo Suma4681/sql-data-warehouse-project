@@ -1,15 +1,15 @@
 /*
 ===============================================================================
-📦 Create Tables for Silver Layer
+ Create Tables for Silver Layer
 ===============================================================================
 Author: Sumanth Koppula
 
-📌 Description:
+ Description:
 This script creates all necessary tables under the `silver` schema.
 These tables store cleansed and transformed data coming from the `bronze` layer.
 Each table includes a `dwh_create_date` timestamp to track load time.
 
-🏗️ Tables Created:
+tables Created:
 - silver.crm_cust_info
 - silver.crm_prd_info
 - silver.crm_sales_details_info
@@ -22,7 +22,7 @@ Run this script in `psql` or `pgAdmin` after setting up the `silver` schema.
 ===============================================================================
 */
 
--- 🧾 Table: silver.crm_cust_info
+--  Table: silver.crm_cust_info
 DROP TABLE IF EXISTS silver.crm_cust_info;
 
 CREATE TABLE IF NOT EXISTS silver.crm_cust_info (
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS silver.crm_cust_info (
 
 ALTER TABLE silver.crm_cust_info OWNER TO postgres;
 
--- 🧾 Table: silver.crm_prd_info
+--  Table: silver.crm_prd_info
 DROP TABLE IF EXISTS silver.crm_prd_info;
 
 CREATE TABLE IF NOT EXISTS silver.crm_prd_info (
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS silver.crm_prd_info (
 
 ALTER TABLE silver.crm_prd_info OWNER TO postgres;
 
--- 🧾 Table: silver.crm_sales_details_info
+--  Table: silver.crm_sales_details_info
 DROP TABLE IF EXISTS silver.crm_sales_details_info;
 
 CREATE TABLE IF NOT EXISTS silver.crm_sales_details_info (
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS silver.crm_sales_details_info (
 
 ALTER TABLE silver.crm_sales_details_info OWNER TO postgres;
 
--- 🧾 Table: silver.erp_CUST_AZ12
+--  Table: silver.erp_CUST_AZ12
 DROP TABLE IF EXISTS silver."erp_CUST_AZ12";
 
 CREATE TABLE IF NOT EXISTS silver."erp_CUST_AZ12" (
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS silver."erp_CUST_AZ12" (
 
 ALTER TABLE silver."erp_CUST_AZ12" OWNER TO postgres;
 
--- 🧾 Table: silver.erp_LOC_A101
+--  Table: silver.erp_LOC_A101
 DROP TABLE IF EXISTS silver."erp_LOC_A101";
 
 CREATE TABLE IF NOT EXISTS silver."erp_LOC_A101" (
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS silver."erp_LOC_A101" (
 
 ALTER TABLE silver."erp_LOC_A101" OWNER TO postgres;
 
--- 🧾 Table: silver.erp_PX_CAT_G1V2
+--  Table: silver.erp_PX_CAT_G1V2
 DROP TABLE IF EXISTS silver."erp_PX_CAT_G1V2";
 
 CREATE TABLE IF NOT EXISTS silver."erp_PX_CAT_G1V2" (
