@@ -1,118 +1,69 @@
-# 🏗️ Data Warehouse & Analytics Project (PostgreSQL | Shell | GitHub)
+# SQL Data Warehouse Project
 
-Welcome to my end-to-end **Data Warehousing & Analytics** portfolio project! 🚀  
-This project demonstrates how to build and automate a modern data pipeline using industry-standard practices — right from ingestion (CSV) to analytical modeling (Gold layer). It showcases **ETL, Data Modeling, Shell Scripting, and Analytics** — all in one!
+## Overview
 
----
+This repository showcases a simple data warehouse built from scratch using SQL.  It demonstrates how to design a dimensional model, write ETL scripts to populate fact and dimension tables, and perform basic analytics queries.  The project is intended as a portfolio piece for data warehousing and SQL skills.
 
-## 🔁 Medallion Architecture Overview
+## Objectives
 
-This project follows the **Medallion Architecture** structure:
+- Design a star schema from a transactional dataset.
+- Write SQL scripts for extracting, transforming and loading (ETL) the data into warehouse tables.
+- Create views and sample queries to answer typical business questions.
+- Document the design choices and trade‑offs in the data model.
 
-| Layer     | Description                                                                 |
-|-----------|-----------------------------------------------------------------------------|
-| **Bronze** | Raw ingestion of CSV files into PostgreSQL                                  |
-| **Silver** | Data cleansing, business logic, and standardization                         |
-| **Gold**   | Analytical star schema (dimensional modeling) for reporting and insights    |
+## Directory structure
 
----
+```
+sql‑data‑warehouse‑project/
+├── ddl/               # DDL scripts to create schema, tables and indexes
+│   ├── create_tables.sql
+│   └── create_views.sql
+├── dml/               # ETL scripts to load data into fact/dim tables
+│   ├── load_dimensions.sql
+│   └── load_fact.sql
+├── queries/           # example analytics queries and reports
+│   ├── sales_by_region.sql
+│   └── top_products.sql
+├── docs/              # documentation and ER diagrams
+│   └── schema_design.md
+├── readme.md          # project description (this file)
+└── data/              # sample CSV files used for ETL (not committed)
+```
 
-## 📖 Project Goals
+## Getting started
 
-🎯 Design and implement a PostgreSQL data warehouse from scratch  
-🔁 Build **ETL pipelines** using SQL & stored procedures  
-🧹 Apply robust **data cleaning & transformation** logic  
-📊 Develop a **Star Schema** for business-ready reporting  
-✅ Implement **quality checks** for data accuracy  
-🖥️ Automate with **shell scripting** for reproducibility  
-📈 Connect to BI tools like Tableau for visualization  
+1. **Choose your database:** This project is database agnostic – you can use PostgreSQL, MySQL, Redshift, Snowflake or another SQL engine that supports basic DDL and DML.  Create an empty database/schema for the warehouse.
 
----
+2. **Run the DDL scripts:**
 
-## 🧩 Technologies Used
+   ```bash
+   psql -d your_database -f ddl/create_tables.sql
+   psql -d your_database -f ddl/create_views.sql
+   ```
 
-- PostgreSQL + SQL
-- pgAdmin + psql
-- Shell Scripting
-- Git & GitHub
-- Tableau (for Gold layer visualization)
-- Markdown + Metadata Cataloging
+3. **Load sample data:**
 
----
+   Prepare sample CSV files in the `data/` directory.  Adjust paths in `dml/load_dimensions.sql` and `dml/load_fact.sql`, then run:
 
-## 📂 Project Structure
+   ```bash
+   psql -d your_database -f dml/load_dimensions.sql
+   psql -d your_database -f dml/load_fact.sql
+   ```
 
+4. **Run analytics queries:**
 
----
+   ```bash
+   psql -d your_database -f queries/sales_by_region.sql
+   ```
 
-## 🔧 Key Scripts
+   Use `queries/` as a starting point to answer additional questions.
 
-| Script/File | Description |
-|-------------|-------------|
-| `init_db_and_schemas.sql` | Initializes PostgreSQL schemas |
-| `create_bronze_tables.sql` | Creates bronze tables for raw ingestion |
-| `load_bronze_data.sh` | Automates CSV loading via terminal |
-| `etl_to_silver.sql` | Cleans and transforms data to silver layer |
-| `create_gold_views.sql` | Builds star schema views |
-| `quality_silver.sql` | Data quality checks on silver tables |
-| `quality_gold.sql` | Validations between fact/dimension tables |
+## Notes
 
----
+- The `docs/schema_design.md` file describes the star schema, primary/foreign keys, grain of the fact table, and other design considerations.
+- Feel free to modify the schema or ETL scripts to adapt to different source data.
+- When deploying to production, schedule the ETL jobs to run incrementally (e.g. daily) and monitor for failures.
 
-## 🗂️ Metadata Catalogs
+## License
 
-Detailed documentation for all tables, columns, and transformations:
-
-- 📌 `bronze_data_catalog.md` → Raw schema
-- 📌 `silver_data_catalog.md` → Cleaned and transformed schema
-- 📌 `gold_data_catalog.md` → Star schema (facts + dimensions)
-
----
-
-## 🧪 Data Quality Checks
-
-- Null or duplicate key validation
-- Trim + formatting issues
-- Date range validation
-- Referential integrity between fact & dimension tables
-- Sales = Quantity × Price validation
-
-Scripts:
-- ✅ `quality_checks_silver.sql`
-- ✅ `quality_checks_gold.sql`
-
----
-
-## 📈 Business Use Cases
-
-📊 **Sales Insights**  
-📊 **Customer Segmentation**  
-📊 **Product Performance**  
-📊 **Time Series Analysis**  
-📊 **Geographic Distribution**  
-
----
-
-## 🚀 How to Run This Project
-
-```bash
-# Step 1: Create DB + Schemas
-psql -U postgres -f automation/init_db_and_schemas.sql
-
-# Step 2: Create bronze tables
-psql -U postgres -d datawarehouse -f scripts/bronze/create_bronze_tables.sql
-
-# Step 3: Load data
-bash automation/load_bronze_data.sh
-
-# Step 4: Transform to silver
-psql -U postgres -d datawarehouse -f scripts/silver/etl_to_silver.sql
-
-# Step 5: Create gold views
-psql -U postgres -d datawarehouse -f scripts/gold/create_gold_views.sql
-
-# Step 6: Run quality checks
-psql -U postgres -d datawarehouse -f quality_checks/quality_silver.sql
-psql -U postgres -d datawarehouse -f quality_checks/quality_gold.sql
-
-Let me know if you'd like this broken down into separate `.md` files (e.g., `bronze_readme.md`, `gold_readme.md`) or if you want me to upload a `.md` file directly.
+This project is licensed under the MIT License.
